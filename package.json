@@ -1,0 +1,32 @@
+{
+  "name": "backendforshoppingvilla",
+  "version": "1.0.0",
+  "description": "this is backend for my main project shopingVilla",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikuwadaskar/BackendForShoppingVilla.git"
+  },
+  "keywords": [
+    "ecommerce"
+  ],
+  "author": "niketan wadaskar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikuwadaskar/BackendForShoppingVilla/issues"
+  },
+  "homepage": "https://github.com/nikuwadaskar/BackendForShoppingVilla#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.2",
+    "nodemon": "^2.0.22"
+  }
+}
