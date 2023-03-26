@@ -6,19 +6,37 @@ module.exports.cerate = async function (req, res) {
     email: body.email,
     pass: body.name,
   };
+  // console.log(body);
   try {
-    const data = await userModel.findOne({ email: body.email }, { name: 1 });
+    const data = await userModel.findOne({ email: body.email });
+    console.log(data);
+
     if (!data) {
-      await userModel.create({
-        email: body.email,
-        name: body.name,
-      });
+      encryptedPassword = await bcrypt.hash(body.password, 10);
+      console.log(encryptedPassword);
+      // await userModel.create({
+      //   email: body.email.toLowerCase(), // sanitize: convert email to lowercase
+      //   name: body.name,
+      //   password: encryptedPassword,
+      // });
+
+      // // Create token
+      // const token = jwt.sign({ user_id: user._id, email }, "niku", {
+      //   expiresIn: "2h",
+      // });
+      // // save user token
+      // user.token = token;
+
+      // return new user
       console.log("created");
+      return res.status(201).json(user);
     } else {
       console.log(data);
+      return res.send("success");
     }
-  } catch {}
-  return res.send("success");
+  } catch {
+    return res.send("success");
+  }
 };
 
 module.exports.delete = async function (req, res) {
