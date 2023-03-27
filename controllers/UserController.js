@@ -1,4 +1,13 @@
 const userModel = require("../models/User");
+const crypto = require("crypto");
+
+const algorithm = "aes-256-cbc";
+// generate 16 bytes of random data
+const initVector = crypto.randomBytes(16);
+// secret key generate 32 bytes of random data
+const SecurityKey = crypto.randomBytes(32);
+// the cipher function
+const cipher = crypto.createCipheriv(algorithm, SecurityKey, initVector);
 
 module.exports.cerate = async function (req, res) {
   const body = req.body;
@@ -8,12 +17,13 @@ module.exports.cerate = async function (req, res) {
   };
   // console.log(body);
   try {
-    const data = await userModel.findOne({ email: body.email });
-    console.log(data);
+    // const data = await userModel.findOne({ email: body.email });
+    console.log(user);
 
-    if (!data) {
-      encryptedPassword = await bcrypt.hash(body.password, 10);
-      console.log(encryptedPassword);
+    if (user) {
+      let encryptedData = cipher.update(body.password, "utf-8", "hex");
+      encryptedData += cipher.final("hex");
+      console.log("Encrypted message: " + encryptedData);
       // await userModel.create({
       //   email: body.email.toLowerCase(), // sanitize: convert email to lowercase
       //   name: body.name,
