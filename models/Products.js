@@ -1,11 +1,6 @@
 var mongoose = require("mongoose");
 var db = require("../config");
-let obj = mongoose.Schema({
-  name: {
-    type: String,
-  }
-},{_id:0})
-var userSchema = new mongoose.Schema(
+var ProductsSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -15,13 +10,12 @@ var userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    cart: [obj],
   },
   {
     timestamps: true,
   }
 );
 
-var userModel = mongoose.model("users", userSchema);
+var productsModal = mongoose.model("Products", ProductsSchema);
 
-module.exports = userModel;
+module.exports = productsModal;

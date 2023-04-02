@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 var url =
-  "mongodb+srv://Pass:Pass@cluster0.3tyyxgy.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://Pass:Pass@one.qadhs56.mongodb.net/Users";
 mongoose.connect(url);
 
 const db = mongoose.connection;
