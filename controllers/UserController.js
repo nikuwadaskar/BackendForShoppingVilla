@@ -66,14 +66,11 @@ module.exports.remove = async function (req, res) {
   try {
     const body = req.body;
 
-    let user = await userModel.findOne(
-      { email: body.email},
-      { cart: 1 }
-    );
+    let user = await userModel.findOne({ email: body.email }, { cart: 1 });
 
     if (user) {
       user.cart = user.cart.filter((e) => {
-       return e.name != body.name;
+        return e.name != body.name;
       });
       await user.save();
       console.log("removed");
@@ -84,4 +81,29 @@ module.exports.remove = async function (req, res) {
     console.log(err);
   }
   return res.status(200).send("success");
+};
+
+module.exports.log_in = async function (req, res) {
+  try {
+    let body = req.body;
+    let user = await userModel.findOne(
+      { email: body.email, name: body.name },
+      { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }
+    );
+    if (user) {
+      res.status(200).send({
+        message: "success",
+        user,
+      });
+    } else {
+      res.status(400).send({
+        message: "User Not Found",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      message: "success",
+    });
+  }
 };
